@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Authchentication: React.FC = () => {
     return (
-        <div className="flex flex-col h-full justify-between">
+        <div className="flex flex-col h-full justify-between min-h-full">
             <header className="absolute inset-x-0 top-0 z-50">
                 <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
@@ -13,13 +13,10 @@ const Authchentication: React.FC = () => {
                                 src="https://www.vectorlogo.zone/logos/redpoint/redpoint-icon.svg"
                                 alt=""
                             />
-
-                            
                         </Link>
                     </div>
                 </nav>
             </header>
-
         <div  className="flex min-h-full flex-1 flex-row justify-center px-6 py-12 lg:px-8">
 
             

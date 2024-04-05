@@ -89,7 +89,7 @@ const Navigation: React.FC = () => {
           <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
               <div className="fixed inset-0 z-50"/>
               <Dialog.Panel
-                  className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                  className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-slate-50 dark:bg-gray-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                   <div className="flex items-center justify-between">
                       <a href="#" className="-m-1.5 p-1.5">
                           <span className="sr-only">Vending Venture</span>
@@ -115,7 +115,7 @@ const Navigation: React.FC = () => {
                                   <a
                                       key={item.name}
                                       href={item.href}
-                                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 dark:text-slate-50 hover:bg-gray-50"
                                   >
                                       {item.name}
                                   </a>
@@ -170,7 +170,7 @@ const Navigation: React.FC = () => {
 
 
         {/* Feature */}
-        <div className="mx-auto mt-10 max-w-7xl px-6 sm:mt-56 lg:px-8 mb-32">
+        <div className="mx-auto mt-10 max-w-7xl px-6 sm:mt-56 lg:px-8 ">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-slate-50">One Stop Service</h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-slate-50 sm:text-4xl">
@@ -181,7 +181,7 @@ const Navigation: React.FC = () => {
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+            <dl className="grid max-w-xl mb-10 grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
               {primaryFeatures.map((feature) => (
                 <div key={feature.name} className="flex flex-col">
                   <dt className="text-base font-semibold leading-7 text-gray-900 dark:text-slate-50">

@@ -1,6 +1,32 @@
+'use client'
+import { cookies } from "next/headers";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const MachineAuthchentication: React.FC = () => {
+
+  const router = useRouter();
+
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const uuid = form.elements.namedItem("uuid") as HTMLInputElement;
+    const request: LoginRequest = {
+      id: uuid.value,
+    }
+    const response = await fetch("/machine/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    });
+    if (response.ok) {
+      sessionStorage.setItem("id", uuid.value)
+      router.push("/machine/dashboard");
+    }
+  }
+
     return (
         <div className="flex flex-col h-full justify-between">
             <header className="absolute inset-x-0 top-0 z-50">
@@ -13,8 +39,6 @@ const MachineAuthchentication: React.FC = () => {
                                 src="https://www.vectorlogo.zone/logos/redpoint/redpoint-icon.svg"
                                 alt=""
                             />
-
-                            
                         </Link>
                     </div>
                 </nav>
@@ -36,7 +60,7 @@ const MachineAuthchentication: React.FC = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div>
             <div className="flex items-center justify-between">
               <label htmlFor="uuid" className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50">
