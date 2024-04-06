@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html className="h-full" lang="en">
-      <body className="content">{children}</body>
+      <body className="h-full content">{children}</body>
     </html>
   );
 }

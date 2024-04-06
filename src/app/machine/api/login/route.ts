@@ -1,11 +1,13 @@
 export async function POST(request: Request) {
     const API_URL = process.env.API_URL;
+
+    const requestBody = await request.json();
     const loginResponse = await fetch(`${API_URL}machine/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(request.body),
+        body: JSON.stringify(requestBody),
     });
 
     const data  = await loginResponse.json();

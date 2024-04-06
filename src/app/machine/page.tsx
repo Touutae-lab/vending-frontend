@@ -1,5 +1,4 @@
 'use client'
-import { cookies } from "next/headers";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -14,6 +13,7 @@ const MachineAuthchentication: React.FC = () => {
     const request: LoginRequest = {
       id: uuid.value,
     }
+    try {
     const response = await fetch("/machine/api/login", {
       method: "POST",
       headers: {
@@ -24,7 +24,12 @@ const MachineAuthchentication: React.FC = () => {
     if (response.ok) {
       sessionStorage.setItem("id", uuid.value)
       router.push("/machine/dashboard");
+    } else {
+      alert(JSON.stringify(await response.json()))
     }
+  } catch (error) {
+    alert("There is Internal Server Error")
+  }
   }
 
     return (
