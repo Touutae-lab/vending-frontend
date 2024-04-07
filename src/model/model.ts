@@ -8,10 +8,18 @@ interface Machine {
     name: string;
     location: string;
     status: string;
-    storageDetails: Storage;
+    StorageDetails: Storage[];
 }
 
 interface Storage {
-    productId: number;
+    product_id: number;
     quantity: number;
+}
+
+interface Product {
+    id: number;
+    name: string;
+    details: string;
+    img_url: string;
+    price: number;
 }
