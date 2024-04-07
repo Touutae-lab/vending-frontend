@@ -1,5 +1,4 @@
 import { PhotoIcon } from "@heroicons/react/16/solid";
-import { useState } from "react";
 
 
 const AddButton: React.FC = (
@@ -7,7 +6,7 @@ const AddButton: React.FC = (
 ) => {
   return (
     <>
-        <label htmlFor="my_modal_7" className="btn bg-slate-50 text-slate-50">Add new Product</label>
+        <label htmlFor="my_modal_7" className="btn ">Add new Product</label>
         <input type="checkbox" id="my_modal_7" className="modal-toggle" />
         <div className="modal" role="dialog">
         <div className="modal-box">

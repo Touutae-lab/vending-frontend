@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 const middleware = async (req: NextRequest) => {
     const jwt = req.cookies.get('auth-token');

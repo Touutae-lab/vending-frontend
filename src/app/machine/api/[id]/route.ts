@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import cookie from 'cookie';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {

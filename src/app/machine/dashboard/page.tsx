@@ -1,5 +1,5 @@
 'use client'
-import AddButton from "@/component/addbutton";
+import AddButton from "@/components/addbutton";
 import { PhotoIcon, PlusIcon, UserCircleIcon } from "@heroicons/react/16/solid";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -21,105 +21,6 @@ const DashboardPage: React.FC = () => {
           imageAlt: "Front of men's Basic Tee in black.",
           price: '$35',
           color: 'Black',
-        },
-        {
-          id: 1,
-          name: 'Basic Tee',
-          href: '#',
-          imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-          imageAlt: "Front of men's Basic Tee in black.",
-          price: '$35',
-          color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/DRWK_75002459-1__01061.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/luxus-belgian-style-lager-cans-355ml__72410.jpg',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
-        },
-        {
-            id: 1,
-            name: 'Basic Tee',
-            href: '#',
-            imageSrc: '/Coca-Cola-Original-Soft-Drink.webp',
-            imageAlt: "Front of men's Basic Tee in black.",
-            price: '$35',
-            color: 'Black',
         },
       ]
 
@@ -152,6 +53,7 @@ const DashboardPage: React.FC = () => {
 
     return (
     <div>
+        
         <nav className="flex items-center justify-end p-6 lg:px-8">
               <AddButton/>
           </nav>
