@@ -52,7 +52,7 @@ const PayItem: React.FC<PayItemProps> = (
             fetchMachine();
             setLoading(false);
             // @ts-ignore
-            document.getElementById('my_modal_1').close();
+            document.getElementById(product.id.toString()).close();
         } else {
             if (response.status === 401) {
                 window.location.href = '/machine/'
@@ -66,12 +66,12 @@ const PayItem: React.FC<PayItemProps> = (
         <>
         <a onClick={() => {
             // @ts-ignore
-            document.getElementById('my_modal_1').showModal()
+            document.getElementById(product.id.toString()).showModal()
         }}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {product.name}
         </a>
-        <dialog id="my_modal_1" className="modal">
+        <dialog id={product.id.toString()} className="modal">
             <div className="bg-white lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16 items-center">
                 <img
                     src={product.img_url}
