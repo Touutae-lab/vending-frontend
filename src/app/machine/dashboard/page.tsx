@@ -7,8 +7,6 @@ import { useEffect, useMemo, useState } from "react";
 
 const DashboardPage: React.FC = () => {
 
-    // const [products, setProducts] = useState([]);
-
     const [machine, setMachine] = useState<Machine>();
 
     const router = useRouter();

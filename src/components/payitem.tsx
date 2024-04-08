@@ -12,9 +12,18 @@ const PayItem: React.FC<PayItemProps> = (
         product
     }
 ) => {
-    const [quantity, setQuantity] = useState(machine.StorageDetails.find((storage) => storage.product_id === product.id)?.quantity || 0);
+    const [quantity, setQuantity] = useState(machine.StorageDetails.find((storage) => storage.product_id === product.id));
     const [total, setTotal] = useState(1);
-
+    const [currentMoney, setCurrentMoney] = useState(0);
+    const accept_payment = [
+        5,
+        10,
+        20,
+        50,
+        100,
+        500,
+        1000
+    ]
 
     return (
         <>
@@ -56,8 +65,8 @@ const PayItem: React.FC<PayItemProps> = (
                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     value={total}
                                     onChange={(e) => setTotal(parseInt(e.target.value, 10))}>
-                                    {
-                                        Array.from({length: quantity}, (_, i) => i + 1).map((i) => (
+                                    {quantity &&
+                                        Array.from({length: quantity.quantity}, (_, i) => i + 1).map((i) => (
                                             <option key={i} value={i}>{i}</option>
                                         ))
                                     }
@@ -71,11 +80,40 @@ const PayItem: React.FC<PayItemProps> = (
                                 </span>
                             </div>
 
-                            <div className="col-span-full">
-                                <button className="mt-4 w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
-                                    Confirm Purchase
-                                </button>
+                        </div>
+                    </div>
+                    <div className="grid col-auto">
+                        <div className="flex justify-between my-4 mx-4">
+                            <div className="font-bold">
+                                Inserted Coin
                             </div>
+                            <h1 className="font-bold">
+                                ${currentMoney}
+                            </h1>
+                        </div>
+                        <div>
+                        {accept_payment.map((payment) => (
+                            <button key={payment} className=" inline-block px-4 mx-4 py-2 bg-gray-200 text-gray-900 font-semibold rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50" onClick={() => {
+                                setCurrentMoney(currentMoney + payment)
+                                console.log(currentMoney)
+                                console.log(quantity?.quantity)
+                            }}>
+                                {payment}
+                            </button>
+                        ))    
+                        }
+                        </div>
+                        <div className="flex justify-between">
+                        <button className="mt-4 w-full sm:w-auto px-6 py-3 bg-gray-200 text-gray-900 font-semibold rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50" onClick={() => {
+                            // @ts-ignore
+                            document.getElementById('my_modal_1').close()
+                            setCurrentMoney(0)
+                        }}>
+                            Cancel
+                        </button>
+                            <button disabled={!(quantity && quantity.quantity > 0 && currentMoney > total * product.price)} className="mt-4 w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 disabled:bg-slate-400">
+                                        Confirm Purchase
+                            </button>
                         </div>
                     </div>
                 </div>
