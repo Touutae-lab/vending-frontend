@@ -143,7 +143,7 @@ const PayItem: React.FC<PayItemProps> = (
                         <div className="flex justify-between">
                         <button className="mt-4 w-full sm:w-auto px-6 py-3 bg-gray-200 text-gray-900 font-semibold rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50" onClick={() => {
                             // @ts-ignore
-                            document.getElementById('my_modal_1').close()
+                            document.getElementById(product.id.toString()).close();
                             setCurrentMoney(0)
                         }}>
                             Cancel
