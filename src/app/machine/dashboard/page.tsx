@@ -13,31 +13,31 @@ const DashboardPage: React.FC = () => {
 
     const [products, setProducts] = useState<Product[]>();
 
-    useEffect(() => {
+    const fetchData = async () => 
+    {
         const id = sessionStorage.getItem("id");
         if (!id) {
-            router.push("/machine/api/login");
-        } else {
-            const fetchData = async () => 
-            {
-                try {
-                    const response = await fetch(`/machine/api/${id}`);
-                    if (response.ok) {
-                      const data: Machine = await JSON.parse(await response.text());
-                      if (typeof data.StorageDetails === 'string') {
-                        data.StorageDetails = JSON.parse(data.StorageDetails);
-                      } 
-                      setMachine(data);
-                    } else {
-                      router.push("/machine");
-                    }
-                  } catch (error) {
-                    console.error("Failed to fetch:", error);
-                    router.push("/machine/login");
-                  }
+          router.push("/machine/api/login");
+      }
+        try {
+            const response = await fetch(`/machine/api/${id}`);
+            if (response.ok) {
+              const data: Machine = await JSON.parse(await response.text());
+              if (typeof data.StorageDetails === 'string') {
+                data.StorageDetails = JSON.parse(data.StorageDetails);
+              } 
+              setMachine(data);
+            } else {
+              router.push("/machine");
             }
-            fetchData();
-        }
+          } catch (error) {
+            console.error("Failed to fetch:", error);
+            router.push("/machine/login");
+          }
+    }
+    
+    useEffect(() => {
+      fetchData();
     }, [])
 
     useEffect(() => {
@@ -90,7 +90,7 @@ const DashboardPage: React.FC = () => {
         </div>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
             <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {products && products.map((product) => (
+            {products && machine && products.map((product) => (
             <div key={product.id} className="group relative">
               <a href="#" onClick={(e) => e.preventDefault()}>
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -103,8 +103,7 @@ const DashboardPage: React.FC = () => {
               <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
-                  <PayItem product={product} machine={machine}/>
-
+                  <PayItem product={product} machine={machine} fetchMachine={fetchData}/>
                   </h3>
                 </div>
                 <p className="text-sm font-medium text-gray-900">{product.price}$</p>

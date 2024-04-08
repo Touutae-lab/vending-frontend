@@ -1,20 +1,24 @@
 import { PhotoIcon } from "@heroicons/react/16/solid";
+import { redirect } from "next/dist/server/api-utils";
 import { useState } from "react";
 
 type PayItemProps = {
     product: Product;
     machine: Machine;
+    fetchMachine: () => void;
 }
 
 const PayItem: React.FC<PayItemProps> = (
     {
-        machine,
-        product
+        fetchMachine,
+        product,
+        machine
     }
 ) => {
     const [quantity, setQuantity] = useState(machine.StorageDetails.find((storage) => storage.product_id === product.id));
     const [total, setTotal] = useState(1);
     const [currentMoney, setCurrentMoney] = useState(0);
+    const [loading, setLoading] = useState(false);
     const accept_payment = [
         5,
         10,
@@ -24,6 +28,39 @@ const PayItem: React.FC<PayItemProps> = (
         500,
         1000
     ]
+
+    const makePayment = async () => {
+        setLoading(true);
+        const payment = {
+            machine_id: machine.UUID,
+            product_id: product.id,
+            quantity: total,
+            amount: product.price * total,
+            payment: currentMoney
+        }
+
+        const response = await fetch(`/machine/api/buy`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payment)
+        });
+        if (response.ok) {
+            const data = await response.json();
+            alert(data.message)
+            fetchMachine();
+            setLoading(false);
+            // @ts-ignore
+            document.getElementById('my_modal_1').close();
+        } else {
+            if (response.status === 401) {
+                window.location.href = '/machine/'
+            }
+            alert(response)
+            setLoading(false);
+        }
+    }
 
     return (
         <>
@@ -111,9 +148,12 @@ const PayItem: React.FC<PayItemProps> = (
                         }}>
                             Cancel
                         </button>
-                            <button disabled={!(quantity && quantity.quantity > 0 && currentMoney > total * product.price)} className="mt-4 w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 disabled:bg-slate-400">
+                        {!loading ? 
+                            <button onClick={makePayment} disabled={!(quantity && quantity.quantity > 0 && currentMoney >= total * product.price)} className="mt-4 w-full sm:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 disabled:bg-slate-400">
                                         Confirm Purchase
                             </button>
+                            : <span className="loading loading-spinner loading-lg"></span>
+                        }
                         </div>
                     </div>
                 </div>
