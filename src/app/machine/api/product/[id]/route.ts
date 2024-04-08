@@ -19,7 +19,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     });
 
     if  (!data.ok) {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+        return new Response(JSON.stringify({ error: data.body }), { status: data.status });
     }
     return new Response(data.body, {
         status: 200,
